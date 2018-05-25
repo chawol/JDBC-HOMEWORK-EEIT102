@@ -1,0 +1,40 @@
+package com.iii.eeit102.chawol2;
+//12313
+import java.io.*;
+import java.sql.*;
+
+public class HOMEWORKinsert {
+	public static void main(String[] args) throws IOException {//用THROW只是方便寫好孩子勿學
+		String data, a[] = null, label;
+		BufferedReader br1 = new BufferedReader(new FileReader("res/source.txt"));//資料讀取的地方
+		data = br1.readLine();
+		label = data;// 得到第一行的LABELNAME
+		String connUrl = "jdbc:sqlserver://localhost:1433;databaseName=jdbc";
+		try (Connection conn = DriverManager.getConnection(connUrl, "sa", "passw0rd");) {
+			/* 要下在SQL的指令 */String qryStmt = 
+			"Insert into  employee(" + label + ") values(?,?,?,?,?,?)";
+			/*向資料庫要空間執行*/PreparedStatement stmt =
+					conn.prepareStatement(qryStmt);
+			while ((data = br1.readLine()) != null)// 把輸入依行分開成字串
+			{
+				a = data.split(",");// 把輸入之行依,拆開
+				/* 設定動態?部分之傳回值 */
+				stmt.setInt(1, Integer.parseInt(a[0].trim()));// 去掉字串前後之空白.trim();
+				stmt.setString(2, a[1].trim());
+				stmt.setString(3, a[2].trim());
+				//stmt.setInt(4, Integer.parseInt(a[3].trim()));
+				stmt.setDouble(4, Double.parseDouble(a[3].trim()));
+				stmt.setInt(5, Integer.parseInt(a[4].trim()));
+				stmt.setString(6, a[5].trim());
+				stmt.addBatch();
+				// 確認執行輸出*****重點 我卡在這很久沒這行會沒辦法給SQL執行
+			}
+			stmt.executeBatch();
+			br1.close();
+			stmt.close();
+			System.out.println(qryStmt);// 檢查你拚出來的字串
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}// end of main()
+}// end of class ResultSetMetaDataDemo

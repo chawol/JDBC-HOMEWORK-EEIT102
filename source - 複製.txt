@@ -1,0 +1,6 @@
+empno,ename,hiredate,salary,deptno,title
+101,Pam Pan,2010-11-10 00:00:00.0,56000.00,100,senior engineer
+102,Lily Lee,2008-03-22 00:00:00.0,44000.00,100,engineer
+103, tephen Hsu,2006-08-14 00:00:00.0,77000.00,200,manager
+104,May Wu,2011-04-04 00:00:00.0,67000.00, 300,manager
+105,Tina Wang,2013-12-25 00:00:00.0,37000.00,200,engineer
