@@ -1,8 +1,6 @@
 ﻿package com.iii.eeit102.chawol2;
-
 import java.io.*;
 import java.sql.*;
-
 public class HOMEWORKinsert {
 	public static void main(String[] args) throws IOException {//用THROW只是方便寫好孩子勿學
 		String data, a[] = null, label;
