@@ -1,25 +1,25 @@
-package com.iii.eeit102.chawol2;
-//12313
+ï»¿package com.iii.eeit102.chawol2;
+
 import java.io.*;
 import java.sql.*;
 
 public class HOMEWORKinsert {
-	public static void main(String[] args) throws IOException {//¥ÎTHROW¥u¬O¤è«K¼g¦n«Ä¤l¤Å¾Ç
+	public static void main(String[] args) throws IOException {//ç”¨THROWåªæ˜¯æ–¹ä¾¿å¯«å¥½å­©å­å‹¿å­¸
 		String data, a[] = null, label;
-		BufferedReader br1 = new BufferedReader(new FileReader("res/source.txt"));//¸ê®ÆÅª¨úªº¦a¤è
+		BufferedReader br1 = new BufferedReader(new FileReader("res/source.txt"));//è³‡æ–™è®€å–çš„åœ°æ–¹
 		data = br1.readLine();
-		label = data;// ±o¨ì²Ä¤@¦æªºLABELNAME
+		label = data;// å¾—åˆ°ç¬¬ä¸€è¡Œçš„LABELNAME
 		String connUrl = "jdbc:sqlserver://localhost:1433;databaseName=jdbc";
 		try (Connection conn = DriverManager.getConnection(connUrl, "sa", "passw0rd");) {
-			/* ­n¤U¦bSQLªº«ü¥O */String qryStmt = 
+			/* è¦ä¸‹åœ¨SQLçš„æŒ‡ä»¤ */String qryStmt = 
 			"Insert into  employee(" + label + ") values(?,?,?,?,?,?)";
-			/*¦V¸ê®Æ®w­nªÅ¶¡°õ¦æ*/PreparedStatement stmt =
+			/*å‘è³‡æ–™åº«è¦ç©ºé–“åŸ·è¡Œ*/PreparedStatement stmt =
 					conn.prepareStatement(qryStmt);
-			while ((data = br1.readLine()) != null)// §â¿é¤J¨Ì¦æ¤À¶}¦¨¦r¦ê
+			while ((data = br1.readLine()) != null)// æŠŠè¼¸å…¥ä¾è¡Œåˆ†é–‹æˆå­—ä¸²
 			{
-				a = data.split(",");// §â¿é¤J¤§¦æ¨Ì,©î¶}
-				/* ³]©w°ÊºA?³¡¤À¤§¶Ç¦^­È */
-				stmt.setInt(1, Integer.parseInt(a[0].trim()));// ¥h±¼¦r¦ê«e«á¤§ªÅ¥Õ.trim();
+				a = data.split(",");// æŠŠè¼¸å…¥ä¹‹è¡Œä¾,æ‹†é–‹
+				/* è¨­å®šå‹•æ…‹?éƒ¨åˆ†ä¹‹å‚³å›å€¼ */
+				stmt.setInt(1, Integer.parseInt(a[0].trim()));// å»æ‰å­—ä¸²å‰å¾Œä¹‹ç©ºç™½.trim();
 				stmt.setString(2, a[1].trim());
 				stmt.setString(3, a[2].trim());
 				//stmt.setInt(4, Integer.parseInt(a[3].trim()));
@@ -27,12 +27,12 @@ public class HOMEWORKinsert {
 				stmt.setInt(5, Integer.parseInt(a[4].trim()));
 				stmt.setString(6, a[5].trim());
 				stmt.addBatch();
-				// ½T»{°õ¦æ¿é¥X*****­«ÂI §Ú¥d¦b³o«Ü¤[¨S³o¦æ·|¨S¿ìªkµ¹SQL°õ¦æ
+				// ç¢ºèªåŸ·è¡Œè¼¸å‡º*****é‡é» æˆ‘å¡åœ¨é€™å¾ˆä¹…æ²’é€™è¡Œæœƒæ²’è¾¦æ³•çµ¦SQLåŸ·è¡Œ
 			}
 			stmt.executeBatch();
 			br1.close();
 			stmt.close();
-			System.out.println(qryStmt);// ÀË¬d§A©é¥X¨Óªº¦r¦ê
+			System.out.println(qryStmt);// æª¢æŸ¥ä½ æ‹šå‡ºä¾†çš„å­—ä¸²
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
